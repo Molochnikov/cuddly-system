@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="utf-8">
+  <link href="https://fonts.googleapis.com/css?family=Neucha" rel="stylesheet">
+	<title>Пинг-понг тесты</title>
+      <link rel="stylesheet" href="normalize.css">
+      <link rel="stylesheet" href="skeleton.css">
+    <link rel="stylesheet" href="ping-pong-tests.css">
+</head>
+<body>
+</body>
+  <script type="text/javascript" src="dogs.js"></script>
+<script type="text/javascript">
+	'use strict';
+	var Тест = {
+		"заголовки таблиц": ["Подающий", "Отбивающий", "Описание",
+		"Ошибка", "Код"],
+		"создать таблицу категории": function(категория) {
+			var блок;
+      var заголовок;
+      var таблица;
+      var шапка;
+      var строка;
+      var i;
+      var тело;
+      
+      блок = document.createElement('div');
+      блок.classList.add("container");
+      блок.classList.add(категория);
+
+			заголовок = document.createElement('h2');
+			заголовок.innerText = категория;
+      
+			таблица = document.createElement('table');
+      таблица.className = "u-full-width";
+			шапка = таблица.createTHead();
+			строка = шапка.insertRow();
+			for(i = 0; i < this["заголовки таблиц"].length; i++)
+			{
+				строка.insertCell().innerHTML = this["заголовки таблиц"][i];
+			}
+			блок.appendChild(заголовок);
+			блок.appendChild(таблица);
+			document.body.appendChild(блок);
+      тело = таблица.appendChild(document.createElement('tbody'))
+			return тело;
+		},
+		"выполнить": function(категория, автор, ответственный, описание,
+			функция) {
+			var результат;
+			var таблица;
+			var ошибка;
+      var галка;
+      var метка;
+      var рукоятка;
+      var имя;
+      var детали;
+      var код;
+      var строка;
+      var ячейка;
+      var красный;
+      
+			таблица = document.querySelector("." + String(категория) + " " +
+				"table");
+			if (!таблица) {
+				таблица = this["создать таблицу категории"](категория);
+			}
+			try 
+			{
+				if ((typeof(функция) !== 'function') ||
+					(typeof(результат = функция()) !== 'boolean'))
+				{
+					throw new Error("Код должен быть функцией возвращающей " +
+						"true или false.");
+				}                
+			}
+			catch(исключение)
+			{
+				ошибка = исключение;
+			}
+
+			галка = document.createElement('input');
+			галка.type = "radio";
+			галка.disabled = "disabled";
+			галка.checked = результат
+			метка = document.createElement('label');
+			рукоятка = document.createElement('label');
+      имя = document.createElement('label');
+			детали = document.createElement('details');
+			код = document.createElement('pre');
+			код.innerHTML = "<code>" + функция + "</code>";
+			строка = таблица.insertRow();
+			строка.insertCell().innerHTML = String(автор);
+      ячейка = строка.insertCell();
+			ячейка.appendChild(галка);
+			ячейка.appendChild(метка);
+			ячейка.appendChild(рукоятка);
+      ячейка.appendChild(имя);
+			имя.innerHTML = String(ответственный);
+			строка.insertCell().innerHTML = описание;
+      красный = document.createElement('span');
+      красный.className = "error";
+			красный.innerHTML = (ошибка || '');
+      строка.insertCell().appendChild(красный);
+			строка.insertCell().appendChild(детали);
+			детали.appendChild(код);
+		},
+	}
+</script>
+<script type="text/javascript" src="ping-pong-tests.js"></script>
+	</html>

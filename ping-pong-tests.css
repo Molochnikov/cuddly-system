@@ -1,0 +1,60 @@
+body {
+  background-color: LAVENDER;
+  font-family: 'Neucha', cursive;
+}
+
+span.error {
+    color: red;
+}
+
+*,
+	*:before,
+	*:after {
+		box-sizing: border-box;
+	}
+
+	input[type="radio"] {
+		display: none;
+	}
+
+	input[type="radio"]+label:before {
+		content: "";
+		/* create custom radiobutton appearance */
+		display: inline-block;
+		width: 25px;
+		height: 25px;
+		/*padding: 6px;*/
+		margin-right: 3px;
+		/* background-color only for content */
+		/*background-clip: content-box;*/
+		border: 9px solid Tomato;
+		background-color: Tomato;
+		border-radius: 50%;
+	}
+
+	/* appearance for checked radiobutton */
+	input[type="radio"]:checked + label:before {
+		border: 9px solid Grey;
+		background-color: Beige;
+	}
+
+	input[type="radio"] + label + label {
+		font-size: 0px;
+		line-height: 0%;
+		width: 15px;
+		border-top: 5px solid PapayaWhip;
+		border-left: 2px solid Tomato;
+		margin-left: -8px;
+    margin-right: 5px;
+	}
+
+
+	input[type="radio"]:checked + label + label {
+		border-left: 2px solid Grey;
+	}
+
+	/* optional styles, I'm using this for centering radiobuttons */
+	label {
+		display: inline-flex;
+		align-items: center;
+	}
