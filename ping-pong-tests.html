@@ -43,10 +43,15 @@
 
       заголовок.appendChild(название);
 
+      i = document.createElement('progress');
+      i.setAttribute('max', 1);
+      i.setAttribute('value', 0);
+      this.прогресс[категория] = i;
+      
       название = document.createElement('div');
       название.classList.add("six");
       название.classList.add("columns");
-      прогресс = название.appendChild(document.createElement('progress'));
+      прогресс = название.appendChild(i);
       
       заголовок.appendChild(название);
       
@@ -62,12 +67,10 @@
 			блок.appendChild(заголовок);
 			блок.appendChild(таблица);
 			document.body.appendChild(блок);
-      тело = таблица.appendChild(document.createElement('tbody'))
+      тело = таблица.appendChild(document.createElement('tbody'));
 			return тело;
 		},
-    "всего":0,
-    "успешно":0,
-    "ошибок":0,
+    "прогресс": Object.create(null),
 		"выполнить": function(категория, автор, ответственный, описание,
 			функция) {
 			var результат;
@@ -83,13 +86,17 @@
       var ячейка;
       var красный;
       var часть;
-      
-      this.всего++;
+
 			таблица = document.querySelector("." + String(категория) + " " +
 				"table");
 			if (!таблица) {
 				таблица = this["создать таблицу категории"](категория);
 			}
+      else
+      {
+        if(this.прогресс[категория])
+          this.прогресс[категория]['max']++;
+      }
 			try 
 			{
 				if ((typeof(функция) !== 'function') ||
@@ -109,7 +116,7 @@
 			галка.disabled = "disabled";
 			галка.checked = результат;
       if (результат)
-        this.успешно++;
+        this.прогресс[категория]['value']++;
 			метка = document.createElement('label');
 			рукоятка = document.createElement('label');
       имя = document.createElement('label');
