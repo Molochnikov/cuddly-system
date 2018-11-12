@@ -17,7 +17,7 @@ span.error {
 		display: none;
 	}
 
-	input[type="radio"]+label:before {
+	input[type="radio"] + label:before {
 		content: "";
 		/* create custom radiobutton appearance */
 		display: inline-block;
@@ -28,14 +28,24 @@ span.error {
 		/* background-color only for content */
 		/*background-clip: content-box;*/
 		border: 9px solid Tomato;
+    border-right: 6px solid #ffddb3;
 		background-color: Tomato;
 		border-radius: 50%;
 	}
 
 	/* appearance for checked radiobutton */
 	input[type="radio"]:checked + label:before {
-		border: 9px solid Grey;
-		background-color: Beige;
+		border: 1px thick #ffddb3;
+    border-left: 20px solid Grey;
+		/*background-color: Beige;*/
+    background-color: #ffddb3;
+	}
+
+	input[type="radio"]:not(:checked) + label:before {
+		border: 1px thick #ffddb3;
+    border-left: 20px solid Tomato;
+		/*background-color: Beige;*/
+    background-color: #ffddb3;
 	}
 
 	input[type="radio"] + label + label {
@@ -43,15 +53,12 @@ span.error {
 		line-height: 0%;
 		width: 15px;
 		border-top: 5px solid PapayaWhip;
-		border-left: 2px solid Tomato;
+		border-left: 2px solid #ffddb3;
+		border-right: 9px solid #ffddb3;
 		margin-left: -8px;
     margin-right: 5px;
 	}
 
-
-	input[type="radio"]:checked + label + label {
-		border-left: 2px solid Grey;
-	}
 
 	/* optional styles, I'm using this for centering radiobuttons */
 	label {
